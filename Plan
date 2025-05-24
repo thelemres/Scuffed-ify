@@ -8,4 +8,6 @@ Use metadata of each song to classify
     - Genre
     - Title
     
-Find a way to use mp3s instead of wavs
+Use Kid3 to add tags to the RIFF INFO (Tag 3) part of the wav
+
+Currently, each wav needs Title and Artist. The Metadata class only grabs title and artist. Has to be modified for adding other fields.
