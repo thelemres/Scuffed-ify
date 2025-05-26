@@ -15,6 +15,8 @@ public class Main {
         }
 
         // To play a song do this and change index
-        allSongs.get(1).playAudio();
+        // allSongs.get(1).playAudio();
+
+        System.out.println(allSongs.get(0).getDuration());
     }
 }

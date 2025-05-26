@@ -52,6 +52,8 @@ public class Metadata {
                             switch (subchunkId) {
                                 case "INAM" -> metadata.title = value;
                                 case "IART" -> metadata.artist = value;
+                                case "IPRD" -> metadata.album = value;
+                                case "IGNR" -> metadata.genre = value;
                             }
 
                             if (subchunkSize % 2 != 0) fis.read(); // pad byte

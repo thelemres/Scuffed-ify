@@ -9,11 +9,15 @@ public class Song implements IPlayableAudio{
     private String genre;
     private Path audioFilePath;
 
+    // Buffer variable to keep File
+    private File file;
+
     public Song(String title, String artist, String album, String genre, File file) {
         this.title = title;
         this.artist = artist;
         this.album = album;
         this.genre = genre;
+        this.file = file;
         this.audioFilePath = file.toPath();
     }
 
@@ -43,6 +47,23 @@ public class Song implements IPlayableAudio{
              + "Artist: " + artist + "\n"
              + "Album: " + album + "\n"
              + "Genre: " + genre + "\n"; 
+    }
+
+    public double getDuration() {
+        AudioInputStream stream = null;
+
+        try {
+            stream = AudioSystem.getAudioInputStream(file);
+            AudioFormat format = stream.getFormat();
+            return file.length() / format.getSampleRate() / (format.getSampleSizeInBits() / 8.0) / format.getChannels();
+        } catch (Exception e) {
+            return -1;
+        } finally {
+            try {
+                stream.close();
+            } catch (Exception ex) {
+            }
+        }
     }
 
     // Play audio on separate thread
