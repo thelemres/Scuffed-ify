@@ -5,11 +5,15 @@ import javax.sound.sampled.*;
 public class Song implements IPlayableAudio{
     private String title;
     private String artist;
+    private String album;
+    private String genre;
     private Path audioFilePath;
 
-    public Song(String title, String artist, File file) {
+    public Song(String title, String artist, String album, String genre, File file) {
         this.title = title;
         this.artist = artist;
+        this.album = album;
+        this.genre = genre;
         this.audioFilePath = file.toPath();
     }
 
@@ -19,6 +23,14 @@ public class Song implements IPlayableAudio{
 
     public String getArtist() {
         return artist;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public String getGenre() {
+        return genre;
     }
 
     public Path getAudioFilePath() {

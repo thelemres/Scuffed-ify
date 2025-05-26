@@ -2,11 +2,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-// Used online resources + AI to create this Metadata grabber
-
 public class Metadata {
     private String title;
     private String artist;
+    private String album;
+    private String genre;
 
     private Metadata() {}
 
@@ -56,9 +56,15 @@ public class Metadata {
                                 case "IART":
                                     metadata.artist = value;
                                     break;
+                                case "IPRD":
+                                    metadata.album = value;
+                                    break;
+                                case "IGNR":
+                                    metadata.genre = value;
+                                    break;
                             }
 
-                            if (subchunkSize % 2 != 0) fis.read();
+                            if (subchunkSize % 2 != 0) fis.read(); // pad byte
                             bytesRead += 8 + subchunkSize + (subchunkSize % 2);
                         }
                     } else {
@@ -82,6 +88,14 @@ public class Metadata {
 
     public String getArtist() {
         return artist;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public String getGenre() {
+        return genre;
     }
 
     private static int littleEndianInt(byte[] bytes, int offset) {
