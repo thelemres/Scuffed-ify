@@ -39,10 +39,14 @@ public class Song implements IPlayableAudio{
 
     @Override
     public String toString() {
-        return title + " by " + artist;
+        return "Title: " + title + "\n"
+             + "Artist: " + artist + "\n"
+             + "Album: " + album + "\n"
+             + "Genre: " + genre + "\n"; 
     }
 
     // Play audio on separate thread
+    @Override
     public void playAudio() {
         new Thread(() -> {
             try {
