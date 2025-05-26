@@ -50,18 +50,8 @@ public class Metadata {
                             String value = new String(data, "ASCII").trim();
 
                             switch (subchunkId) {
-                                case "INAM":
-                                    metadata.title = value;
-                                    break;
-                                case "IART":
-                                    metadata.artist = value;
-                                    break;
-                                case "IPRD":
-                                    metadata.album = value;
-                                    break;
-                                case "IGNR":
-                                    metadata.genre = value;
-                                    break;
+                                case "INAM" -> metadata.title = value;
+                                case "IART" -> metadata.artist = value;
                             }
 
                             if (subchunkSize % 2 != 0) fis.read(); // pad byte
