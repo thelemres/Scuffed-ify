@@ -21,7 +21,7 @@ public class SongLoader {
             String album = meta.getAlbum();
             String genre = meta.getGenre();
 
-            if (title != null && artist != null) {
+            if (title != null && artist != null && album != null && genre != null) {
                 songs.add(new Song(title, artist, album, genre, file));
             } else {
                 System.out.println("Skipping file (missing metadata): " + file.getName());

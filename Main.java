@@ -11,7 +11,12 @@ public class Main {
 
         // Lists all songs that were loaded into arraylist allSongs
         for (Song song : allSongs) {
-            System.out.println("Loaded song: " + song);
+            System.out.println("Loaded song: " + song.getTitle());
+        }
+
+        ArrayList<Album> allAlbums = AlbumLoader.loadAlbums(allSongs);
+        for ( Album album : allAlbums) {
+            System.out.println("Loaded album: " + album.getTitle());
         }
 
         // To play a song do this and change index
