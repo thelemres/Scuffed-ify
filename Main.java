@@ -17,10 +17,17 @@ public class Main {
         ArrayList<Album> allAlbums = AlbumLoader.loadAlbums(allSongs);
         for ( Album album : allAlbums) {
             System.out.println("Loaded album: " + album.getTitle());
+            album.printSongs();
         }
+
+        Algorithms.sortSongs(allSongs);
 
         // To play a song do this and change index
         // allSongs.get(1).playAudio();
+
+        for (Song song : Algorithms.sortSongs(allSongs)) {
+            System.out.println("Song: " + song.getTitle());
+        }
 
         System.out.println(allSongs.get(0).getDuration());
     }

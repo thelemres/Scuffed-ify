@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 
 public class AlbumLoader {
+
+    private AlbumLoader() {}
+
     private static ArrayList<Album> allAlbums = new ArrayList<>();
 
     private static Album findAlbumByTitle(String title) {
