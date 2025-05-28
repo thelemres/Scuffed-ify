@@ -13,9 +13,6 @@ public class Algorithms {
         for (int i = 0; i < songs.size(); i++) {
             firstCharsAsInts[i] = (int) songs.get(i).getTitle().charAt(0);
         }
-        for (int num : firstCharsAsInts) {
-            System.out.println(num);
-        }
 
         mergeSort(firstCharsAsInts, firstCharsAsInts.length);
 
@@ -23,9 +20,35 @@ public class Algorithms {
 
         for (int i = 0; i < songs.size(); i++) {
             for (Song song : songs) {
+                int firstCharAsInt = (int) song.getTitle().charAt(0);
+
                 //check if the first chars are the same
-                if (((int) songs.get(i).getTitle().charAt(0)) == firstCharsAsInts[i]) {
-                    sortedArray[i] = song;
+                if (firstCharAsInt == firstCharsAsInts[i]) {
+                    sortedArray[i] = song.copy();
+                }
+            }
+        }
+
+        return sortedArray;
+    }
+
+    public static Album[] sortAlbums(ArrayList<Album> albums) {
+        int[] firstCharsAsInts = new int[albums.size()];
+        for (int i = 0; i < albums.size(); i++) {
+            firstCharsAsInts[i] = (int) albums.get(i).getTitle().charAt(0);
+        }
+
+        mergeSort(firstCharsAsInts, firstCharsAsInts.length);
+
+        Album[] sortedArray = new Album[albums.size()];
+
+        for (int i = 0; i < albums.size(); i++) {
+            for (Album album : albums) {
+                int firstCharAsInt = (int) album.getTitle().charAt(0);
+
+                //check if the first chars are the same
+                if (firstCharAsInt == firstCharsAsInts[i]) {
+                    sortedArray[i] = album.copy();
                 }
             }
         }

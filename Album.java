@@ -8,6 +8,16 @@ public class Album {
     public Album(String title, String artist) {
         this.title = title;
         this.artist = artist;
+    } 
+    public Album(Album album) {
+        this.title = album.title;
+        this.artist = album.artist;
+        this.songs = (ArrayList) songs.clone();
+    }
+
+
+    public Album copy() {
+        return new Album(this);
     }
 
     //methods for the arraylist
@@ -24,6 +34,7 @@ public class Album {
         }
     }
 
+    //getters
     public String getTitle() { return title; }
     public String getArtist() { return artist; }
 }

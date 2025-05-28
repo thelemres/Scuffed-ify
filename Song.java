@@ -2,7 +2,7 @@ import java.io.File;
 import java.nio.file.Path;
 import javax.sound.sampled.*;
 
-public class Song implements IPlayableAudio{
+public class Song implements IPlayableAudio {
     private String title;
     private String artist;
     private String album;
@@ -19,6 +19,15 @@ public class Song implements IPlayableAudio{
         this.genre = genre;
         this.file = file;
         this.audioFilePath = file.toPath();
+    }
+
+    public Song(Song song) {
+        this.title = song.title;
+        this.artist =song.artist;
+        this.album = song.album;
+        this.genre = song.genre;
+        this.file = song.file;
+        this.audioFilePath = song.audioFilePath;
     }
 
     public String getTitle() {
@@ -39,6 +48,15 @@ public class Song implements IPlayableAudio{
 
     public Path getAudioFilePath() {
         return audioFilePath;
+    }
+
+    // @Override
+    // public Object clone() throws CloneNotSupportedException {
+    //     return new Song(this);
+    // }
+
+    public Song copy() {
+        return new Song(this);
     }
 
     @Override
