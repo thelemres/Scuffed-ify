@@ -49,5 +49,24 @@ public class MusicLibrary {
     public Album[] sortAlbums() {
         return Algorithms.sortAlbums(allAlbums);
     }
+    public Song[] sortSongsReverse() {
+        Song[] sortedSongs = Algorithms.sortSongs(allSongs);
+        Song[] reverseSort = new Song[sortedSongs.length];
 
-}
+        for (int i = sortedSongs.length; i > 0; i--) {
+            reverseSort[sortedSongs.length - i] = sortedSongs[i];
+        }
+
+        return reverseSort;
+    }
+    public Album[] sortAlbumsReverse() {
+        Album[] sortedAlbums = Algorithms.sortAlbums(allAlbums);
+        Album[] reverseSort = new Album[sortedAlbums.length];
+
+        for (int i = sortedAlbums.length; i > 0; i--) {
+            reverseSort[sortedAlbums.length - i] = sortedAlbums[i];
+        }
+
+        return reverseSort;
+    }
+ }
