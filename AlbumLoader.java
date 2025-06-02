@@ -23,6 +23,7 @@ public class AlbumLoader {
 
     public static ArrayList<Album> loadAlbums(ArrayList<Song> songs) {
         for (Song song : songs) {
+            // gets title of album, not title of song
             String title = song.getAlbum();
             String artist = song.getArtist();
 

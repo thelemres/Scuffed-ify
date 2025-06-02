@@ -10,6 +10,16 @@ public class Playlist {
         this.artist = artist;
     }
 
+    public Playlist(Playlist playlist) {
+        this.title = playlist.title;
+        this.artist = playlist.artist;
+        this.songs = (ArrayList) songs.clone();
+    }
+
+    public Playlist copy() {
+        return new Playlist(this);
+    }
+
     public void addSong(Song song) {
         songs.add(song);
     }
