@@ -32,6 +32,7 @@ public class Algorithms {
         return sortedArray;
     }
 
+    //works the same way as sortSongs
     public static Album[] sortAlbums(ArrayList<Album> albums) {
         int[] firstCharsAsInts = new int[albums.size()];
         for (int i = 0; i < albums.size(); i++) {
