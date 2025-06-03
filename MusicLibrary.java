@@ -4,12 +4,14 @@ public class MusicLibrary {
     private ArrayList<Song> allSongs;    
     private ArrayList<Album> allAlbums;
     private ArrayList<Artist> allArtists;
+    private ArrayList<Playlist> allPlaylists;
 
     public MusicLibrary() {
         SongLoader loader = new SongLoader("Songs");
         allSongs = loader.loadSongs();
         allAlbums = AlbumLoader.loadAlbums(allSongs);
         allArtists = ArtistLoader.loadArtists(allSongs, allAlbums);
+        allPlaylists = PlaylistLoader.loadPlaylists(allSongs, "PlayLists");
     }
 
     //methods for finding things
@@ -37,12 +39,13 @@ public class MusicLibrary {
         album.addSong(song);
     }
     //adds new songs that have been added to the "Songs" directory
-    //also adds new songs to their appropriate albums and creates new albums if needed
+    //also updates all relevant things
     public void refreshSongs() {
         SongLoader loader = new SongLoader("Songs");
         allSongs = loader.loadSongs();
         allAlbums = AlbumLoader.loadAlbums(allSongs);
         allArtists = ArtistLoader.loadArtists(allSongs, allAlbums);
+        allPlaylists = PlaylistLoader.loadPlaylists(allSongs, "PlayLists");
     }
     
     //methods used for sorting albums/songs

@@ -2,17 +2,14 @@ import java.util.ArrayList;
 
 public class Playlist {
     private String title;
-    private String artist;
     private ArrayList<Song> songs = new ArrayList<>();
 
-    public Playlist(String title, String artist) {
+    public Playlist(String title) {
         this.title = title;
-        this.artist = artist;
     }
 
     public Playlist(Playlist playlist) {
         this.title = playlist.title;
-        this.artist = playlist.artist;
         this.songs = (ArrayList) songs.clone();
     }
 
@@ -35,5 +32,4 @@ public class Playlist {
     }
 
     public String getTitle() { return title; }
-    public String getArtist() { return artist; }
 }
