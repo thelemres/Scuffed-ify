@@ -24,7 +24,7 @@ public class Algorithms {
 
                 //check if the first chars are the same
                 if (firstCharAsInt == firstCharsAsInts[i]) {
-                    sortedArray[i] = song.copy();
+                    sortedArray[i] = song.copy(); //copies since sortedArray[i] = song was causing a nullptr
                 }
             }
         }

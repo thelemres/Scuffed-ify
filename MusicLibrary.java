@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 
 public class MusicLibrary {
-    private ArrayList<Song> allSongs;
+    private ArrayList<Song> allSongs;    
     private ArrayList<Album> allAlbums;
+    private ArrayList<Artist> allArtists;
 
     public MusicLibrary() {
         SongLoader loader = new SongLoader("Songs");
         allSongs = loader.loadSongs();
         allAlbums = AlbumLoader.loadAlbums(allSongs);
+        allArtists = ArtistLoader.loadArtists(allSongs, allAlbums);
     }
 
     //methods for finding things
@@ -40,6 +42,7 @@ public class MusicLibrary {
         SongLoader loader = new SongLoader("Songs");
         allSongs = loader.loadSongs();
         allAlbums = AlbumLoader.loadAlbums(allSongs);
+        allArtists = ArtistLoader.loadArtists(allSongs, allAlbums);
     }
     
     //methods used for sorting albums/songs
