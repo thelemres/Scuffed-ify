@@ -57,6 +57,56 @@ public class Algorithms {
         return sortedArray;
     }
 
+    //works the same way as sortSongs
+    public static Playlist[] sortPlaylists(ArrayList<Playlist> playlist) {
+        int[] firstCharsAsInts = new int[playlist.size()];
+        for (int i = 0; i < playlist.size(); i++) {
+            firstCharsAsInts[i] = (int) playlist.get(i).getTitle().charAt(0);
+        }
+
+        mergeSort(firstCharsAsInts, firstCharsAsInts.length);
+
+        Playlist[] sortedArray = new Playlist[playlist.size()];
+
+        for (int i = 0; i < playlist.size(); i++) {
+            for (Playlist album : playlist) {
+                int firstCharAsInt = (int) album.getTitle().charAt(0);
+
+                //check if the first chars are the same
+                if (firstCharAsInt == firstCharsAsInts[i]) {
+                    sortedArray[i] = album.copy();
+                }
+            }
+        }
+
+        return sortedArray;
+    }
+
+    //works the same way as sortSongs
+    public static Artist[] sortArtists(ArrayList<Artist> artists) {
+        int[] firstCharsAsInts = new int[artists.size()];
+        for (int i = 0; i < artists.size(); i++) {
+            firstCharsAsInts[i] = (int) artists.get(i).getName().charAt(0);
+        }
+
+        mergeSort(firstCharsAsInts, firstCharsAsInts.length);
+
+        Artist[] sortedArray = new Artist[artists.size()];
+
+        for (int i = 0; i < artists.size(); i++) {
+            for (Artist artist : artists) {
+                int firstCharAsInt = (int) artist.getName().charAt(0);
+
+                //check if the first chars are the same
+                if (firstCharAsInt == firstCharsAsInts[i]) {
+                    sortedArray[i] = artist.copy();
+                }
+            }
+        }
+
+        return sortedArray;
+    }
+
     public static void mergeSort(int arr[], int length) {
         if (length < 2) {
             return;
