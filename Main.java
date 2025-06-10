@@ -63,7 +63,7 @@ public class Main {
         songsTopPanel.add(songsTitleLabel, BorderLayout.CENTER);
         songsPanel.add(songsTopPanel, BorderLayout.NORTH);
         
-        ArrayList<Song> songs = musicLibrary.getAllSongs();
+        ArrayList<Song> songs = musicLibrary.getSongs();
 
         String[] songStrings = new String[songs.size()];
         for (int i = 0; i < songs.size(); i++) {
