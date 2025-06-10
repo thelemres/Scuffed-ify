@@ -84,7 +84,6 @@ public class Algorithms {
 
     //works the same way as sortSongs
     public static Artist[] sortArtists(ArrayList<Artist> artists) {
-        System.out.println("bruhhh");
         int[] firstCharsAsInts = new int[artists.size()];
         for (int i = 0; i < artists.size(); i++) {
             firstCharsAsInts[i] = (int) artists.get(i).getName().toLowerCase().charAt(0);
@@ -153,12 +152,12 @@ public class Algorithms {
 
     private static boolean isPlaylistInArray(Playlist[] playlists, Playlist playlist) {
         for (Playlist play : playlists) {
-            if (playlist == null) {
+            if (play == null) {
                 continue;
             }
 
             //check if the names of both of the playlists are the same
-            if (playlist.getTitle().equalsIgnoreCase(playlist.getTitle())) {
+            if (play.getTitle().equalsIgnoreCase(playlist.getTitle())) {
                 return true;
             }
         }

@@ -85,7 +85,7 @@ public class MusicLibrary {
         Song[] reverseSort = new Song[sortedSongs.length];
 
         for (int i = sortedSongs.length - 1; i > 0; i--) {
-            reverseSort[sortedSongs.length - i] = sortedSongs[i];
+            reverseSort[sortedSongs.length - 1 - i] = sortedSongs[i];
         }
 
         return reverseSort;
@@ -95,7 +95,7 @@ public class MusicLibrary {
         Album[] reverseSort = new Album[sortedAlbums.length];
 
         for (int i = sortedAlbums.length - 1; i > 0; i--) {
-            reverseSort[sortedAlbums.length - i] = sortedAlbums[i];
+            reverseSort[sortedAlbums.length - 1 - i] = sortedAlbums[i];
         }
 
         return reverseSort;
@@ -105,7 +105,7 @@ public class MusicLibrary {
         Playlist[] reverseSort = new Playlist[sortedPlaylists.length];
 
         for (int i = sortedPlaylists.length - 1; i > 0; i--) {
-            reverseSort[sortedPlaylists.length - i] = sortedPlaylists[i];
+            reverseSort[sortedPlaylists.length - 1 - i] = sortedPlaylists[i];
         }
 
         return reverseSort;
@@ -114,8 +114,8 @@ public class MusicLibrary {
         Artist[] sortedArtists = Algorithms.sortArtists(allArtists);
         Artist[] reverseSort = new Artist[sortedArtists.length];
 
-        for (int i = sortedArtists.length - 1; i > 0; i--) {
-            reverseSort[sortedArtists.length - i] = sortedArtists[i];
+        for (int i = sortedArtists.length - 1; i >= 0; i--) {
+            reverseSort[sortedArtists.length - 1 - i] = sortedArtists[i];
         }
 
         return reverseSort;
