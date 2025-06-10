@@ -9,8 +9,9 @@ public class Song implements IPlayableAudio {
     private String genre;
     private Path audioFilePath;
 
-    // Buffer variable to keep File
+    // Buffer variables
     private File file;
+    private Clip clip;
 
     public Song(String title, String artist, String album, String genre, File file) {
         this.title = title;
@@ -86,26 +87,41 @@ public class Song implements IPlayableAudio {
 
     // Play audio on separate thread
     @Override
-    public void playAudio() {
-        new Thread(() -> {
-            try {
-                File file = audioFilePath.toFile();
-                AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioStream);
-                clip.start();
+    public synchronized void playAudio() {
+        // Stop currently playing clip if exists
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+            clip.close();
+        }
 
-                while (!clip.isRunning()) {
-                    Thread.sleep(10);
-                }
-                while (clip.isRunning()) {
-                    Thread.sleep(10);
-                }
+        try {
+            File file = audioFilePath.toFile();
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
 
-                clip.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
+            // Optionally, start a thread to close clip after playing finishes
+            new Thread(() -> {
+                try {
+                    while (clip.isRunning()) {
+                        Thread.sleep(10);
+                    }
+                    clip.close();
+                } catch (InterruptedException ignored) {
+                }
+            }).start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Optionally, add a stop method:
+    public synchronized void stopAudio() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+            clip.close();
+        }
     }
 }
