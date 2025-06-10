@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-
 public class MusicLibrary {
     private ArrayList<Song> allSongs;    
     private ArrayList<Album> allAlbums;
@@ -32,6 +31,22 @@ public class MusicLibrary {
         }
         return null;
     }
+    public Playlist findPlaylistByTitle(String title) {
+        for (Playlist playlist : allPlaylists) {
+            if (playlist.getTitle().equalsIgnoreCase(title)) {
+                return playlist;
+            }
+        }
+        return null;
+    }
+    public Artist findArtistByName(String name) {
+        for (Artist artist : allArtists) {
+            if (artist.getName().equalsIgnoreCase(name)) {
+                return artist;
+            }
+        }
+        return null;
+    }
 
     //misc methods
     public void addSongToAlbum(String title) {
@@ -46,15 +61,24 @@ public class MusicLibrary {
         allSongs = loader.loadSongs();
         allAlbums = AlbumLoader.loadAlbums(allSongs);
         allArtists = ArtistLoader.loadArtists(allSongs, allAlbums);
-        allPlaylists = PlaylistLoader.loadPlaylists(allSongs, "PlayLists");
+        allPlaylists = PlaylistLoader.loadPlaylists(allSongs, "Playlists");
     }
-    
-    //methods used for sorting albums/songs
+    public void clearConsole() {
+        System.out.print("\033[H\033[2J"); // clears out the console
+    }
+
+    //methods used for sortin
     public Song[] sortSongs() {
         return Algorithms.sortSongs(allSongs);
     }
     public Album[] sortAlbums() {
         return Algorithms.sortAlbums(allAlbums);
+    }
+    public Artist[] sortArtists() {
+        return Algorithms.sortArtists(allArtists);
+    }
+    public Playlist[] sortPlaylists() {
+        return Algorithms.sortPlaylists(allPlaylists);
     }
     public Song[] sortSongsReverse() {
         Song[] sortedSongs = Algorithms.sortSongs(allSongs);
@@ -76,20 +100,30 @@ public class MusicLibrary {
 
         return reverseSort;
     }
+    public Playlist[] sortPlaylistsReverse() {
+        Playlist[] sortedPlaylists = Algorithms.sortPlaylists(allPlaylists);
+        Playlist[] reverseSort = new Playlist[sortedPlaylists.length];
 
-    public ArrayList<Song> getAllSongs() {
-        return allSongs;
-    }
+        for (int i = sortedPlaylists.length; i > 0; i--) {
+            reverseSort[sortedPlaylists.length - i] = sortedPlaylists[i];
+        }
 
-    public ArrayList<Album> getAllAlbums() {
-        return allAlbums;
+        return reverseSort;
     }
+    public Artist[] sortArtistsReverse() {
+        Artist[] sortedArtists = Algorithms.sortArtists(allArtists);
+        Artist[] reverseSort = new Artist[sortedArtists.length];
 
-    public ArrayList<Artist> getAllArtists() {
-        return allArtists;
-    }
+        for (int i = sortedArtists.length; i > 0; i--) {
+            reverseSort[sortedArtists.length - i] = sortedArtists[i];
+        }
 
-    public ArrayList<Playlist> getAllPlaylists() {
-        return allPlaylists;
+        return reverseSort;
     }
- }
+    
+    //getters
+    public ArrayList<Artist> getArtists() { return allArtists; }
+    public ArrayList<Playlist> getPlaylists() { return allPlaylists; }
+    public ArrayList<Album> getAlbums() { return allAlbums; }
+    public ArrayList<Song> getSongs() { return allSongs; }
+}

@@ -8,6 +8,11 @@ public class Artist {
     public Artist(String name) {
         this.name = name;
     }
+    public Artist(Artist artist) {
+        this.name = artist.name;
+        this.songs = artist.songs;
+        this.albums = artist.albums;
+    }
 
 
     //Song methods
@@ -74,4 +79,9 @@ public class Artist {
 
     //getters
     public String getName() { return name; }
+
+    //misc
+    public Artist copy() {
+        return new Artist(this);
+    }
 }
