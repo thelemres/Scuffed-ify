@@ -37,4 +37,5 @@ public class Album {
     //getters
     public String getTitle() { return title; }
     public String getArtist() { return artist; }
+    public ArrayList<Song> getSongs() { return songs; }
 }

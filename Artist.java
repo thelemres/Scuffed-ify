@@ -75,7 +75,7 @@ public class Artist {
 
         return reverseSort;
     }
-    public ArrayList<Album> Albums() { return albums; }
+    public ArrayList<Album> getAlbums() { return albums; }
 
     //getters
     public String getName() { return name; }

@@ -23,7 +23,7 @@ public class Algorithms {
                 int firstCharAsInt = (int) song.getTitle().charAt(0);
 
                 //check if the first chars are the same
-                if (firstCharAsInt == firstCharsAsInts[i]) {
+                if (firstCharAsInt == firstCharsAsInts[i] && !isSongInArray(sortedArray, song)) {
                     sortedArray[i] = song.copy(); //copies since sortedArray[i] = song was causing a nullptr
                 }
             }
@@ -36,7 +36,7 @@ public class Algorithms {
     public static Album[] sortAlbums(ArrayList<Album> albums) {
         int[] firstCharsAsInts = new int[albums.size()];
         for (int i = 0; i < albums.size(); i++) {
-            firstCharsAsInts[i] = (int) albums.get(i).getTitle().charAt(0);
+            firstCharsAsInts[i] = (int) albums.get(i).getTitle().toLowerCase().charAt(0);
         }
 
         mergeSort(firstCharsAsInts, firstCharsAsInts.length);
@@ -45,10 +45,10 @@ public class Algorithms {
 
         for (int i = 0; i < albums.size(); i++) {
             for (Album album : albums) {
-                int firstCharAsInt = (int) album.getTitle().charAt(0);
+                int firstCharAsInt = (int) album.getTitle().toLowerCase().charAt(0);
 
                 //check if the first chars are the same
-                if (firstCharAsInt == firstCharsAsInts[i]) {
+                if (firstCharAsInt == firstCharsAsInts[i] && !isAlbumInArray(sortedArray, album)) {
                     sortedArray[i] = album.copy();
                 }
             }
@@ -58,23 +58,23 @@ public class Algorithms {
     }
 
     //works the same way as sortSongs
-    public static Playlist[] sortPlaylists(ArrayList<Playlist> playlist) {
-        int[] firstCharsAsInts = new int[playlist.size()];
-        for (int i = 0; i < playlist.size(); i++) {
-            firstCharsAsInts[i] = (int) playlist.get(i).getTitle().charAt(0);
+    public static Playlist[] sortPlaylists(ArrayList<Playlist> playlists) {
+        int[] firstCharsAsInts = new int[playlists.size()];
+        for (int i = 0; i < playlists.size(); i++) {
+            firstCharsAsInts[i] = (int) playlists.get(i).getTitle().toLowerCase().charAt(0);
         }
 
         mergeSort(firstCharsAsInts, firstCharsAsInts.length);
 
-        Playlist[] sortedArray = new Playlist[playlist.size()];
+        Playlist[] sortedArray = new Playlist[playlists.size()];
 
-        for (int i = 0; i < playlist.size(); i++) {
-            for (Playlist album : playlist) {
-                int firstCharAsInt = (int) album.getTitle().charAt(0);
+        for (int i = 0; i < playlists.size(); i++) {
+            for (Playlist playlist : playlists) {
+                int firstCharAsInt = (int) playlist.getTitle().toLowerCase().charAt(0);
 
                 //check if the first chars are the same
-                if (firstCharAsInt == firstCharsAsInts[i]) {
-                    sortedArray[i] = album.copy();
+                if (firstCharAsInt == firstCharsAsInts[i] && !isPlaylistInArray(sortedArray, playlist)) {
+                    sortedArray[i] = playlist.copy();
                 }
             }
         }
@@ -84,27 +84,85 @@ public class Algorithms {
 
     //works the same way as sortSongs
     public static Artist[] sortArtists(ArrayList<Artist> artists) {
+        System.out.println("bruhhh");
         int[] firstCharsAsInts = new int[artists.size()];
         for (int i = 0; i < artists.size(); i++) {
-            firstCharsAsInts[i] = (int) artists.get(i).getName().charAt(0);
+            firstCharsAsInts[i] = (int) artists.get(i).getName().toLowerCase().charAt(0);
         }
 
         mergeSort(firstCharsAsInts, firstCharsAsInts.length);
+        
 
         Artist[] sortedArray = new Artist[artists.size()];
 
         for (int i = 0; i < artists.size(); i++) {
             for (Artist artist : artists) {
-                int firstCharAsInt = (int) artist.getName().charAt(0);
+                int firstCharAsInt = (int) artist.getName().toLowerCase().charAt(0);
 
                 //check if the first chars are the same
-                if (firstCharAsInt == firstCharsAsInts[i]) {
+                if (firstCharAsInt == firstCharsAsInts[i] && !isArtistInArray(sortedArray, artist)) {
                     sortedArray[i] = artist.copy();
                 }
             }
         }
-
         return sortedArray;
+    }
+    
+    //checkers, check if the object is already in the sorted array
+    private static boolean isArtistInArray(Artist[] artists, Artist artist) {
+        for (Artist art : artists) {
+            if (art == null) {
+                continue;
+            }
+
+            //check if the names of both of the artists are the same
+            if (art.getName().equalsIgnoreCase(artist.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isAlbumInArray(Album[] albums, Album album) {
+        for (Album alb : albums) {
+            if (alb == null) {
+                continue;
+            }
+
+            //check if the names of both of the albums are the same
+            if (alb.getTitle().equalsIgnoreCase(album.getTitle())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isSongInArray(Song[] songs, Song song) {
+        for (Song s : songs) {
+            if (s == null) {
+                continue;
+            }
+
+            //check if the names of both of the songs are the same
+            if (s.getTitle().equalsIgnoreCase(song.getTitle())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isPlaylistInArray(Playlist[] playlists, Playlist playlist) {
+        for (Playlist play : playlists) {
+            if (playlist == null) {
+                continue;
+            }
+
+            //check if the names of both of the playlists are the same
+            if (playlist.getTitle().equalsIgnoreCase(playlist.getTitle())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void mergeSort(int arr[], int length) {
