@@ -23,7 +23,11 @@ public class Main {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         JPanel panel1 = new JPanel(new GridLayout(1, 1));
-        panel1.add(new JLabel("Scuffed-ify", SwingConstants.CENTER));
+        JLabel title = new JLabel("Scuffed-ify", SwingConstants.CENTER);
+        Font titleFont = title.getFont();
+        title.setFont(new Font(titleFont.getName(), Font.BOLD, 36));
+        panel1.add(title);
+
 
         JPanel panel2 = new JPanel(new GridLayout(2, 2));
         JButton songsButton = new JButton("Songs");
@@ -45,11 +49,18 @@ public class Main {
         mainPanel.add(panel1);
         mainPanel.add(panel2);
 
-        // Currently Playing Panel
+        // Bottom Panel
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+
         JPanel currentlyPlayingPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel currentlyPlayingLabel = new JLabel("No song playing");
         currentlyPlayingPanel.add(currentlyPlayingLabel);
         currentlyPlayingPanel.setPreferredSize(new Dimension(frame.getWidth(), 60));
+        bottomPanel.add(currentlyPlayingPanel, BorderLayout.CENTER);
+
+        JButton pauseButton = new JButton("Pause");
+        pauseButton.addActionListener(e -> cardLayout.show(cardPanel, "mainPanel"));
+        bottomPanel.add(pauseButton, BorderLayout.EAST);
 
         // Songs Screen Panel
         JPanel songsPanel = new JPanel(new BorderLayout());
@@ -127,7 +138,7 @@ public class Main {
 
         frame.add(cardPanel, BorderLayout.CENTER);
 
-        frame.add(currentlyPlayingPanel, BorderLayout.SOUTH);
+        frame.add(bottomPanel, BorderLayout.SOUTH);
 
         frame.setVisible(true);
     }
