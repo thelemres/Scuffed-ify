@@ -76,4 +76,20 @@ public class MusicLibrary {
 
         return reverseSort;
     }
+
+    public ArrayList<Song> getAllSongs() {
+        return allSongs;
+    }
+
+    public ArrayList<Album> getAllAlbums() {
+        return allAlbums;
+    }
+
+    public ArrayList<Artist> getAllArtists() {
+        return allArtists;
+    }
+
+    public ArrayList<Playlist> getAllPlaylists() {
+        return allPlaylists;
+    }
  }
