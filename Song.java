@@ -12,6 +12,8 @@ public class Song implements IPlayableAudio {
     // Buffer variables
     private File file;
     private Clip clip;
+    private boolean isPaused = false;
+    private long pausePosition = 0;
 
     public Song(String title, String artist, String album, String genre, File file) {
         this.title = title;
@@ -101,7 +103,6 @@ public class Song implements IPlayableAudio {
             clip.open(audioStream);
             clip.start();
 
-            // Optionally, start a thread to close clip after playing finishes
             new Thread(() -> {
                 try {
                     while (clip.isRunning()) {
@@ -117,11 +118,24 @@ public class Song implements IPlayableAudio {
         }
     }
 
-    // Optionally, add a stop method:
     public synchronized void stopAudio() {
-        if (clip != null && clip.isRunning()) {
+        if (clip != null) {
             clip.stop();
             clip.close();
         }
+        pausePosition = 0;
+        isPaused = false;
+    }
+
+    public synchronized void pauseAudio() {
+        if (clip != null && clip.isRunning()) {
+            pausePosition = clip.getMicrosecondPosition();
+            clip.stop();
+            isPaused = true;
+        }
+    }
+
+    public boolean isPaused() {
+        return isPaused;
     }
 }
