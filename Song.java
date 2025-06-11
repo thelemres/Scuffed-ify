@@ -134,14 +134,33 @@ public class Song implements IPlayableAudio {
         if (clip != null && clip.isRunning()) {
             pausePosition = clip.getMicrosecondPosition();
             clip.stop();
+            clip.close();
             isPaused = true;
         }
     }
 
     public synchronized void unpauseAudio() {
         if (clip != null && !clip.isRunning()) {
-            clip.setMicrosecondPosition(pausePosition);
-            clip.start();
+            try {
+                File file = audioFilePath.toFile();
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+                clip = AudioSystem.getClip();
+                clip.open(audioStream);
+                clip.setMicrosecondPosition(pausePosition);
+                clip.start();
+
+                new Thread(() -> {
+                try {
+                    while (clip.isRunning()) {
+                        Thread.sleep(10);
+                    }
+                    clip.close();
+                } catch (InterruptedException ignored) {
+                }
+            }).start();
+            } catch (Exception e) {
+            e.printStackTrace();
+            }
             isPaused = false;
         }
     }
