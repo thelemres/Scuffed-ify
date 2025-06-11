@@ -14,6 +14,7 @@ public class Song implements IPlayableAudio {
     private Clip clip;
     private boolean isPaused = false;
     private long pausePosition = 0;
+    private boolean isPlaying = false;
 
     public Song(String title, String artist, String album, String genre, File file) {
         this.title = title;
@@ -102,6 +103,7 @@ public class Song implements IPlayableAudio {
             clip = AudioSystem.getClip();
             clip.open(audioStream);
             clip.start();
+            isPlaying = true;
 
             new Thread(() -> {
                 try {
@@ -124,6 +126,7 @@ public class Song implements IPlayableAudio {
             clip.close();
         }
         pausePosition = 0;
+        isPlaying = false;
         isPaused = false;
     }
 
@@ -135,7 +138,19 @@ public class Song implements IPlayableAudio {
         }
     }
 
+    public synchronized void unpauseAudio() {
+        if (clip != null && !clip.isRunning()) {
+            clip.setMicrosecondPosition(pausePosition);
+            clip.start();
+            isPaused = false;
+        }
+    }
+
     public boolean isPaused() {
         return isPaused;
+    }
+
+    public boolean isPlaying() {
+        return isPlaying;
     }
 }

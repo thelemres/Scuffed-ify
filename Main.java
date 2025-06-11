@@ -58,9 +58,31 @@ public class Main {
         currentlyPlayingPanel.setPreferredSize(new Dimension(frame.getWidth(), 60));
         bottomPanel.add(currentlyPlayingPanel, BorderLayout.CENTER);
 
+        JPanel controlPanel = new JPanel(new GridLayout(1,2));
+
         JButton pauseButton = new JButton("Pause");
-        pauseButton.addActionListener(e -> cardLayout.show(cardPanel, "mainPanel"));
-        bottomPanel.add(pauseButton, BorderLayout.EAST);
+        pauseButton.addActionListener(e -> {
+            ArrayList<Song> songs = musicLibrary.getSongs();
+            for (Song song : songs) {
+                if (!song.isPaused()) {
+                    song.pauseAudio();
+                }
+            }
+        });
+        controlPanel.add(pauseButton);
+
+        JButton playButton = new JButton("Play");
+        playButton.addActionListener(e -> {
+            ArrayList<Song> songs = musicLibrary.getSongs();
+            for (Song song : songs) {
+                if (song.isPlaying() && song.isPaused()) {
+                    song.unpauseAudio();
+                }
+            }
+        });
+        controlPanel.add(playButton);
+
+        bottomPanel.add(controlPanel, BorderLayout.EAST);
 
         // Songs Screen Panel
         JPanel songsPanel = new JPanel(new BorderLayout());
